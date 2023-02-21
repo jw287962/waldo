@@ -45,13 +45,16 @@ async function addCharacterPosition(boxPositionArray,imageName,collectionName,pe
 }
 
 
-async function getFireStoreData(){
+async function getFireStoreData(imageID){
   const db = getFirestore();
   const imagesRef = collection(db , "images");
-  const docSnap = await getDoc(doc(imagesRef, "where's waldo"));
+  const docSnap = await getDoc(doc(imagesRef, imageID));
+  const fetchedData = docSnap._document.data.value.mapValue.fields;
+  console.log(fetchedData);
+  return fetchedData;
   
   
-  const q = query(imagesRef, orderBy(""), startAt(docSnap));
+  const q = query(imagesRef);
   console.log(q);
 }
 
