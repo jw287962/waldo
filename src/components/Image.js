@@ -1,6 +1,8 @@
 import React, {useEffect,useState}from "react";
 import "../Image.css"
 import Dropdown from './Dropdown';
+import {addCharacterPosition, initializeFireStoreApp} from './fireStoreMethod';
+
 
 function importAll(img){
   let object = [];
@@ -15,6 +17,8 @@ function importAll(img){
   });
   return object;
 }
+initializeFireStoreApp();
+
 
 
   const allPictures = importAll(require.context('../assets',false,/\.(png|jpe?g|svg|gif)$/));
@@ -32,7 +36,21 @@ const Image = () => {
 
   useEffect(()=> {
     const image = document.querySelector('img');
-    image.addEventListener('click', imageClicked);
+      console.log(image.clientWidth, image.clientHeight);
+    // console.log(image.width, 'width'    , image.height , 'height')
+function roundMath(math) {
+  return Math.round(math);
+}
+      const odlawPosition ={
+        left: [roundMath(0.285*image.clientWidth),roundMath(0.534*image.clientHeight)], right: [roundMath(0.30103*image.clientWidth),roundMath(0.5384*image.clientHeight)], bottomL: [roundMath(0.2835*image.clientWidth),roundMath(0.6222*image.clientHeight)], bottomR: [roundMath(0.3*image.clientWidth),roundMath(0.6236*image.clientHeight)],
+      }
+
+     
+const imageName1 = "waldo"
+addCharacterPosition(odlawPosition,imageName1,'images','odlaw');
+   
+
+image.addEventListener('click', imageClicked);
 
     function imageClicked(e) {
       const toggle = !toggleDrop
@@ -40,11 +58,12 @@ const Image = () => {
       dropdown.classList.toggle('hidden');
       setToggleDrop(toggle);
         setPosX(e.clientX);
-        setPosY(e.clientY);
+        setPosY(e.clientY-20);
     }
     return function cleanup() {
       image.removeEventListener('click', imageClicked);
     };
+
   },[])
 
   useEffect(() => {
@@ -55,7 +74,7 @@ const Image = () => {
   return (
     <div>
       <img src={allPictures[0].imageFile} alt="where" ></img>
-      <Dropdown posX = {posX} posY = {posY} ></Dropdown>
+      <Dropdown posX = {posX} posY = {posY} imageID="waldo"></Dropdown>
       </div>
  
     )
