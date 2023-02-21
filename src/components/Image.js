@@ -23,7 +23,11 @@ initializeFireStoreApp();
 
   const allPictures = importAll(require.context('../assets',false,/\.(png|jpe?g|svg|gif)$/));
 
-
+  function roundMath(math) {
+    console.log(math);
+  
+    return Math.round(math);
+  }
 
 
 const Image = () => {
@@ -36,19 +40,17 @@ const Image = () => {
 
   useEffect(()=> {
     const image = document.querySelector('img');
-      console.log(image.clientWidth, image.clientHeight);
-    // console.log(image.width, 'width'    , image.height , 'height')
-function roundMath(math) {
-  return Math.round(math);
-}
+
+    image.onload = function() {
       const odlawPosition ={
-        left: [roundMath(0.285*image.clientWidth),roundMath(0.534*image.clientHeight)], right: [roundMath(0.30103*image.clientWidth),roundMath(0.5384*image.clientHeight)], bottomL: [roundMath(0.2835*image.clientWidth),roundMath(0.6222*image.clientHeight)], bottomR: [roundMath(0.3*image.clientWidth),roundMath(0.6236*image.clientHeight)],
+        bottomL: [roundMath(0.284*image.clientWidth),roundMath(0.518*image.clientHeight)], bottomR: [roundMath(0.304*image.clientWidth),roundMath(0.518*image.clientHeight)], left: [roundMath(0.284*image.clientWidth),roundMath(0.430*image.clientHeight)], right: [roundMath(0.304*image.clientWidth),roundMath(0.430*image.clientHeight)],
       }
 
-     
-const imageName1 = "waldo"
-addCharacterPosition(odlawPosition,imageName1,'images','odlaw');
-   
+      const imageName1 = "waldo"
+    addCharacterPosition(odlawPosition,imageName1,'images','odlaw');
+    };
+    
+    // console.log(image.width, 'width'    , image.height , 'height')
 
 image.addEventListener('click', imageClicked);
 
