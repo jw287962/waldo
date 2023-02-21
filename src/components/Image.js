@@ -47,7 +47,8 @@ const Image = () => {
     const imageWidth = image.width/0.95; 
 
       const odlawPosition ={
-        bottomL: [roundMath(0.270*imageWidth),roundMath(0.59*imageHeight)], bottomR: [roundMath(0.288*imageWidth),roundMath(0.515*imageHeight)], left: [roundMath(0.270*imageWidth),roundMath(0.515*imageHeight)], right: [roundMath(0.288*imageWidth),roundMath(0.515*imageHeight)],
+        bottomL: [roundMath(0.270*imageWidth),roundMath(0.597*imageHeight)], bottomR: [roundMath(0.288*imageWidth),roundMath(0.597*imageHeight)], 
+        left: [roundMath(0.270*imageWidth),roundMath(0.515*imageHeight)], right: [roundMath(0.288*imageWidth),roundMath(0.515*imageHeight)],
       }
 
       const imageName1 = "waldo"
