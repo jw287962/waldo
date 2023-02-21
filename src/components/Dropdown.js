@@ -49,42 +49,44 @@ const Dropdown = (props) => {
   },[])
 
   const clickedButton = (e) => {
+    const dropdown = document.querySelector('.dropdown')
+    dropdown.classList.toggle('hidden');
     let isInBox = false;;
-console.log(e.target.textContent);
+
 console.log(imageData);
 const positions = imageData.boxPosition.mapValue.fields
 console.log(positions);
-for (const key1 in positions) {
-      console.log(positions[key1].arrayValue.values);
-    const dataPoints = positions[key1].arrayValue.values;
-    dataPoints.forEach(element => {
-      switch(key1) {
-        case 'bottomL': 
 
-            break;
+const boxCoord = [];
+console.log(boxCoord);
+
+console.log(posX);
+// between bottomL and bottomR's X numbers
+// Y should be between bottomL and Left's y  and between bottomRight and Right's Y
+console.log(positions.bottomL.arrayValue.values[0].integerValue*1);
+if(posX >= positions.bottomL.arrayValue.values[0].integerValue*1 && posX<= positions.bottomR.arrayValue.values[0].integerValue*1 
+  // && posX >= positions.left.arrayValue.values[0]*1 && posX <= positions.right.arrayValue.values[0]*1
+  // && posY <= positions.bottomL.arrayValue.values[1]*1 && posY >= positions.left.arrayValue.values[1]*1
+  && posY <= positions.bottomR.arrayValue.values[1].integerValue*1 && posY >= positions.right.arrayValue.values[1].integerValue*1
+  && e.target.textContent.toLowerCase() === imageData.personName.stringValue){
+  console.log('checking correct person data');
+
+    console.log('correct positon for Odlaw for now!!!!!!!!!!!!')
+  }
 
 
-        case 'bottomR':
 
-      }
-      console.log(element.integerValue);
-    });
-
- 
 }
+
 // const isMatch = positions.map(ele => console.log(ele)) 
 // Check person button click is same and coincides with person position
 
-if(imageData.personName.stringValue === e.target.textContent) {
-
-}
-
-  }
 
   return (
     <div className="col dropdown hidden" >
         <button onClick={clickedButton}>Waldo</button>
         <button onClick={clickedButton}>Odlaw</button>
+        <button onClick={clickedButton} className="outer">...</button>
     </div>
   )
 }

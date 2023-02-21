@@ -24,7 +24,6 @@ initializeFireStoreApp();
   const allPictures = importAll(require.context('../assets',false,/\.(png|jpe?g|svg|gif)$/));
 
   function roundMath(math) {
-    console.log(math);
   
     return Math.round(math);
   }
