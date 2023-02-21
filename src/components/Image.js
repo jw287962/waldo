@@ -42,15 +42,18 @@ const Image = () => {
     const image = document.querySelector('img');
 
     image.onload = function() {
+    console.log(image.width, 'width'    , image.height , 'height')
+    const imageHeight = image.height + 58;
+    const imageWidth = image.width/0.95; 
+
       const odlawPosition ={
-        bottomL: [roundMath(0.284*image.clientWidth),roundMath(0.518*image.clientHeight)], bottomR: [roundMath(0.304*image.clientWidth),roundMath(0.518*image.clientHeight)], left: [roundMath(0.284*image.clientWidth),roundMath(0.430*image.clientHeight)], right: [roundMath(0.304*image.clientWidth),roundMath(0.430*image.clientHeight)],
+        bottomL: [roundMath(0.270*imageWidth),roundMath(0.59*imageHeight)], bottomR: [roundMath(0.288*imageWidth),roundMath(0.515*imageHeight)], left: [roundMath(0.270*imageWidth),roundMath(0.515*imageHeight)], right: [roundMath(0.288*imageWidth),roundMath(0.515*imageHeight)],
       }
 
       const imageName1 = "waldo"
     addCharacterPosition(odlawPosition,imageName1,'images','odlaw');
     };
     
-    // console.log(image.width, 'width'    , image.height , 'height')
 
 image.addEventListener('click', imageClicked);
 
@@ -59,8 +62,9 @@ image.addEventListener('click', imageClicked);
       const dropdown = document.querySelector('.dropdown')
       dropdown.classList.toggle('hidden');
       setToggleDrop(toggle);
-        setPosX(e.clientX);
-        setPosY(e.clientY-20);
+        setPosX(e.pageX);
+        console.log(posX)
+        setPosY(e.pageY);
     }
     return function cleanup() {
       image.removeEventListener('click', imageClicked);

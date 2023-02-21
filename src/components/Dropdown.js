@@ -60,7 +60,7 @@ for (const key1 in positions) {
     dataPoints.forEach(element => {
       switch(key1) {
         case 'bottomL': 
-        
+
             break;
 
 
