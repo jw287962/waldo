@@ -8,29 +8,8 @@ import {addCharacterPosition, initializeFireStoreApp} from './components/fireSto
 
 const App = () => {
 
-initializeFireStoreApp();
-
-//   const firebaseConfig = {
-//     apiKey: "AIzaSyDwnotClaPasS5jB3Qb9zoLXT5Tbjag9o4",
-//     authDomain: "waldo-d61a6.firebaseapp.com",
-//     projectId: "waldo-d61a6",
-//     storageBucket: "waldo-d61a6.appspot.com",
-//     messagingSenderId: "223196428111",
-//     appId: "1:223196428111:web:d1a41335026c2d7e4ab73a"
-//   };
-//   // Initialize Firebase
-//   const app = initializeApp(firebaseConfig);
 
 
-const odlawPosition ={
-  left: [311,437], right: [313,500], bottomL: [330,436], bottomR: [322,501],
-}
-const imageName1 = "where's waldo"
-addCharacterPosition(odlawPosition,imageName1,'images','odlaw');
-
-
-  
-  
 
 
   return (
