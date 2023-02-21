@@ -43,12 +43,12 @@ const Image = () => {
 
     image.onload = function() {
     console.log(image.width, 'width'    , image.height , 'height')
-    const imageHeight = image.height + 58;
-    const imageWidth = image.width/0.95; 
+    const imageHeight = image.height;    //+58
+    const imageWidth = image.width/0.95;  //  /0.95
 
       const odlawPosition ={
-        bottomL: [roundMath(0.270*imageWidth),roundMath(0.597*imageHeight)], bottomR: [roundMath(0.288*imageWidth),roundMath(0.597*imageHeight)], 
-        left: [roundMath(0.270*imageWidth),roundMath(0.515*imageHeight)], right: [roundMath(0.288*imageWidth),roundMath(0.515*imageHeight)],
+        bottomL: [roundMath(0.272*imageWidth),roundMath(0.555*imageHeight)+58], bottomR: [roundMath(0.291*imageWidth),roundMath(0.555*imageHeight)+58], 
+        left: [roundMath(0.272*imageWidth),roundMath(0.471*imageHeight)+58], right: [roundMath(0.291*imageWidth),roundMath(0.471*imageHeight)+58],
       }
 
       const imageName1 = "waldo"
