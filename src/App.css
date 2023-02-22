@@ -7,7 +7,9 @@ h1{
   padding: 15px;
 }
 
-
+nav{
+  text-align: center;
+}
 
 
 
@@ -51,4 +53,16 @@ button{
 
 .hidden{
   display: none;
+}
+
+
+.imgSelect{
+  height: 400px;
+  width: 400px;
+
+}
+
+.select{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }

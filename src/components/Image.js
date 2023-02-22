@@ -4,24 +4,11 @@ import Dropdown from './Dropdown';
 import {addCharacterPosition, initializeFireStoreApp} from './fireStoreMethod';
 
 
-function importAll(img){
-  let object = [];
-  let allImages = img.keys().map(img);
 
-  img.keys().forEach((element,i) => {
-    let imageName = element.substring(2,element.substring(2).indexOf('.')+2);
-    imageName = imageName.substring(0,1).toUpperCase() + imageName.substring(1);
-    let imageFile = allImages[i];
-    object.push({imageName,imageFile});
-    i++;
-  });
-  return object;
-}
+
 initializeFireStoreApp();
 
 
-
-  const allPictures = importAll(require.context('../assets',false,/\.(png|jpe?g|svg|gif)$/));
 
   function roundMath(math) {
   
@@ -116,7 +103,7 @@ console.log('NO ENTER FIRST')
 
   return (
     <div>
-      <img src={allPictures[0].imageFile} alt="where" ></img>
+      <img src='' alt="where" ></img>
       <Dropdown posX = {posX} posY = {posY} imageID="waldo" imageSizeChanged={imageSizeChanged}></Dropdown>
       </div>
  

@@ -9,12 +9,8 @@ import {addCharacterPosition, initializeFireStoreApp} from './components/fireSto
 const App = () => {
 
 
-
-
-
   return (
     <div className="App">
-        <Nav></Nav>
         <Image></Image>
     </div>
   );
