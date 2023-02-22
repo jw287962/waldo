@@ -5,7 +5,6 @@ import {addCharacterPosition, initializeFireStoreApp} from './fireStoreMethod';
 
 
 
-
 initializeFireStoreApp();
 
 
@@ -16,9 +15,10 @@ initializeFireStoreApp();
   }
 
 
-const Image = () => {
+const Image = (props) => {
+  console.log(props);
 
-  
+    const [currentImage] = useState(props.image); 
   const [posX,setPosX] = useState(0);
   const [posY,setPosY] = useState(0);
   const [toggleDrop,setToggleDrop] = useState(true);
@@ -103,7 +103,7 @@ console.log('NO ENTER FIRST')
 
   return (
     <div>
-      <img src='' alt="where" ></img>
+      <img src={currentImage.imageFile}  alt="where" ></img>
       <Dropdown posX = {posX} posY = {posY} imageID="waldo" imageSizeChanged={imageSizeChanged}></Dropdown>
       </div>
  
