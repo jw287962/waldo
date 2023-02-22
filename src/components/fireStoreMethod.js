@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   collection,
-  addDoc,getDoc,
+  addDoc,getDoc, getDocs,
   query, 
   orderBy,startAt,
   limit,
@@ -45,9 +45,9 @@ async function addCharacterPosition(boxPositionArray,imageName,collectionName,pe
 }
 
 
-async function getFireStoreData(imageID){
+async function getFireStoreData(imageID,collectionName){
   const db = getFirestore();
-  const imagesRef = collection(db , "images");
+  const imagesRef = collection(db , collectionName);
   const docSnap = await getDoc(doc(imagesRef, imageID));
   const fetchedData = docSnap._document.data.value.mapValue.fields;
   console.log(fetchedData);
@@ -57,7 +57,17 @@ async function getFireStoreData(imageID){
   const q = query(imagesRef);
   console.log(q);
 }
+async function getFireStoreCollection(collectionName){
+  const db = getFirestore();
+  const imagesRef = collection(db , collectionName);
+  const docSnap = await getDocs(imagesRef);
+  const arrayHolder = [];
+  const fetchedData = docSnap.forEach((ele) => {
+    arrayHolder.push(ele._document.data.value.mapValue.fields);
+  })
 
+  return arrayHolder;
+ 
+}
 
-
-export  {addCharacterPosition, initializeFireStoreApp,getFireStoreData};
+export  {addCharacterPosition, initializeFireStoreApp,getFireStoreData, getFireStoreCollection};

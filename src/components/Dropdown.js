@@ -13,11 +13,11 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 
-import { initializeFireStoreApp,getFireStoreData } from "./fireStoreMethod";
+import { initializeFireStoreApp,getFireStoreData,getFireStoreCollection } from "./fireStoreMethod";
 
 const Dropdown = (props) => {
 
-  const [imageID,setImageID] = useState(props.imageID);
+  const [imageID,setImageID] = useState('waldo');
   const [clickedWaldo,setClickedWaldo] = useState(false);
   const [imageData,setImageData] = useState(undefined);  //this is the targetbox that we check with
   const [imageSizeChanged,setImageSizeChanged] = useState(props.imageSizeChanged);
@@ -25,19 +25,22 @@ const Dropdown = (props) => {
   initializeFireStoreApp();
   const {posX,posY} = props;
 
+//   useEffect(() => {
+//     getFireStoreData(imageID,'WhereisWaldo').then((response) => response)
+//     .then((data) => setImageData(data));
+// }, [imageID])
 
   useEffect(()=> {
    const dropdown = document.querySelector('.dropdown')
    dropdown.style.left = `${posX}px`;
    dropdown.style.top = `${posY}px`;
-   
-    console.log('dropdown, ',imageSizeChanged)
-    console.log(updatedImage, 'updatedImage is false?');
-   if(imageSizeChanged && updatedImage){
-    getFireStoreData(imageID).then((response) => response)
+   console.log(posX,posY)
+   if(imageSizeChanged && updatedImage ){
+    getFireStoreCollection('WhereisWaldo').then((response) => response)
     .then((data) => setImageData(data));
     setUpdatedImage(false);
    }
+   
    if(imageSizeChanged != props.imageSizeChanged){
     setImageSizeChanged(props.imageSizeChanged);
   }
@@ -47,11 +50,9 @@ const Dropdown = (props) => {
   useEffect(()=> {
   
    if(imageID){
-    getFireStoreData(imageID).then((response) => response)
+    getFireStoreCollection('WhereisWaldo').then((response) => response)
     .then((data) => setImageData(data));
-
    }
-   
 
   },[])
 
@@ -60,16 +61,29 @@ const Dropdown = (props) => {
     setUpdatedImage(true);
 
    }
+   console.log(imageID);
+   if(imageID !== e.target.textContent.toLowerCase()){
+    setImageID(e.target.textContent.toLowerCase())
+   }
     const dropdown = document.querySelector('.dropdown')
     dropdown.classList.toggle('hidden');
-
-const positions = imageData.boxPosition.mapValue.fields
+    // console.log(imageData);
+    let num = 0;
+if(e.target.textContent === 'Waldo'){
+  console.log('waldo is clicked')
+  num = 1;
+}if(e.target.textContent === 'Odlaw'){
+  num = 0;
+}
+console.log(num);
+const positions = imageData[num].boxPosition.mapValue.fields;
+console.log(positions);
 
 // between bottomL and bottomR's X numbers
 // Y should be between bottomL and Left's y  and between bottomRight and Right's Y
 if(posX >= positions.bottomL.arrayValue.values[0].integerValue*1 && posX<= positions.bottomR.arrayValue.values[0].integerValue*1 
   && posY <= positions.bottomR.arrayValue.values[1].integerValue*1 && posY >= positions.right.arrayValue.values[1].integerValue*1
-  && e.target.textContent.toLowerCase() === imageData.personName.stringValue){
+  && e.target.textContent.toLowerCase() === imageData[num].personName.stringValue){
   console.log('checking correct person data');
     console.log('correct positon for Odlaw for now!!!!!!!!!!!!')
     console.log('___________________-')

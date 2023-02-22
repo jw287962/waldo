@@ -41,7 +41,7 @@ const [startTime] = useState(startTimer);
     const output = Math.floor(delta / 1000); // in seconds
     // alternatively just show wall clock time:
     setTimer(new Date(output * 1000).toISOString().substring(11, 19));
-}, 100); 
+}, 10000); 
 
   useEffect(()=> {
     const image = document.querySelector('img');
@@ -51,14 +51,18 @@ const [startTime] = useState(startTimer);
     const imageHeight = image.height;    //+58
     const imageWidth = image.width/0.95;  //  /0.95
 
- 
+
 
       const odlawPosition ={
         bottomL: [roundMath(0.272*imageWidth),roundMath(0.555*imageHeight)+58], bottomR: [roundMath(0.291*imageWidth),roundMath(0.555*imageHeight)+58], 
         left: [roundMath(0.272*imageWidth),roundMath(0.471*imageHeight)+58], right: [roundMath(0.291*imageWidth),roundMath(0.471*imageHeight)+58],
       }
-      const imageName1 = "waldo"
-    addCharacterPosition(odlawPosition,imageName1,'images','odlaw');
+      const waldoPosition ={
+        bottomL: [roundMath(0.544*imageWidth),roundMath(0.555*imageHeight)+58], bottomR: [roundMath(0.572*imageWidth),roundMath(0.555*imageHeight)+58], 
+        left: [roundMath(0.544*imageWidth),roundMath(0.5*imageHeight)+58], right: [roundMath(0.572*imageWidth),roundMath(0.5*imageHeight)+58],
+      }
+    addCharacterPosition(odlawPosition,'odlaw',currentImage.imageName,'odlaw');
+    addCharacterPosition(waldoPosition,'waldo',currentImage.imageName,'waldo');
     setImageWidth(image.width/0.95);
     setImageHeight(image.height);
     };
@@ -120,7 +124,7 @@ console.log('NO ENTER FIRST')
     <div>
       <div>Timer: {timer}</div>
       <img src={currentImage.imageFile}  alt="where" ></img>
-      <Dropdown posX = {posX} posY = {posY} imageID="waldo" imageSizeChanged={imageSizeChanged}></Dropdown>
+      <Dropdown posX = {posX} posY = {posY} imageID={currentImage.imageName} imageSizeChanged={imageSizeChanged}></Dropdown>
       </div>
  
     )
