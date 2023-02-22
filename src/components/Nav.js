@@ -4,7 +4,7 @@ const Nav = () => {
   
   return (
       <nav>
-        <h1>Where's 'Blank' Style Game </h1>
+        <h1>Where's 'Blank' </h1>
 
       </nav>
   )
