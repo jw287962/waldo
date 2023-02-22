@@ -2,7 +2,7 @@ import React, {useEffect,useState}from "react";
 import "../Image.css"
 import Dropdown from './Dropdown';
 import {addCharacterPosition, initializeFireStoreApp} from './fireStoreMethod';
-
+import {useLocation} from "react-router-dom";
 
 
 initializeFireStoreApp();
@@ -16,10 +16,11 @@ initializeFireStoreApp();
 
 
 const Image = (props) => {
+  let { state } = useLocation();
   // console.log(props);
   const d = new Date();
   let startTimer = d.getTime();
-    const [currentImage] = useState(props.image); 
+    const [currentImage,setCurrentImage] = useState(props.image); 
   const [posX,setPosX] = useState(0);
   const [posY,setPosY] = useState(0);
   const [toggleDrop,setToggleDrop] = useState(true);
@@ -41,7 +42,14 @@ const [startTime] = useState(startTimer);
     // alternatively just show wall clock time:
     setTimer(new Date(output * 1000).toISOString().substring(11, 19));
 }, 1000); 
-
+useEffect(()=>{
+  if( state && currentImage !== state.image ){
+    setCurrentImage(state.image);
+  }
+  if(!currentImage && state){
+    setCurrentImage(state.image);
+  }    
+})
   useEffect(()=> {
     const image = document.querySelector('img');
 
