@@ -16,8 +16,9 @@ initializeFireStoreApp();
 
 
 const Image = (props) => {
-  console.log(props);
-
+  // console.log(props);
+  const d = new Date();
+  let startTimer = d.getTime();
     const [currentImage] = useState(props.image); 
   const [posX,setPosX] = useState(0);
   const [posY,setPosY] = useState(0);
@@ -27,6 +28,20 @@ const Image = (props) => {
 
   const [imageHeight,setImageHeight] = useState(undefined);
 
+
+  const [timer,setTimer] = useState(0);
+
+const [startTime] = useState(startTimer);
+
+
+
+  setInterval(function() {
+    var delta = Date.now() - startTime; // milliseconds elapsed since start
+  
+    const output = Math.floor(delta / 1000); // in seconds
+    // alternatively just show wall clock time:
+    setTimer(new Date(output * 1000).toISOString().substring(11, 19));
+}, 100); 
 
   useEffect(()=> {
     const image = document.querySelector('img');
@@ -103,6 +118,7 @@ console.log('NO ENTER FIRST')
 
   return (
     <div>
+      <div>Timer: {timer}</div>
       <img src={currentImage.imageFile}  alt="where" ></img>
       <Dropdown posX = {posX} posY = {posY} imageID="waldo" imageSizeChanged={imageSizeChanged}></Dropdown>
       </div>

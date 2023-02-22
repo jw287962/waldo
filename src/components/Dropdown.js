@@ -58,7 +58,6 @@ const Dropdown = (props) => {
   const clickedButton = (e) => {
    if(!updatedImage){
     setUpdatedImage(true);
-   e.target.click();
 
    }
     const dropdown = document.querySelector('.dropdown')
@@ -74,6 +73,8 @@ if(posX >= positions.bottomL.arrayValue.values[0].integerValue*1 && posX<= posit
   console.log('checking correct person data');
     console.log('correct positon for Odlaw for now!!!!!!!!!!!!')
     console.log('___________________-')
+   e.target.classList.add('hidden')
+
   }
 
 }
