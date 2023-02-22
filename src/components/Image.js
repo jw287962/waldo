@@ -51,8 +51,6 @@ const [startTime] = useState(startTimer);
     const imageHeight = image.height;    //+58
     const imageWidth = image.width/0.95;  //  /0.95
 
-
-
       const odlawPosition ={
         bottomL: [roundMath(0.272*imageWidth),roundMath(0.555*imageHeight)+58], bottomR: [roundMath(0.291*imageWidth),roundMath(0.555*imageHeight)+58], 
         left: [roundMath(0.272*imageWidth),roundMath(0.471*imageHeight)+58], right: [roundMath(0.291*imageWidth),roundMath(0.471*imageHeight)+58],
@@ -92,14 +90,16 @@ image.addEventListener('click', imageClicked);
       image.removeEventListener('click', imageClicked);
     };
   },[])
-
+// useEffect(() => {
+  
+// },)
   useEffect(() => {
     const image = document.querySelector('img');
+    setImageSizeChanged(true);
 
-    if(image && Math.abs(imageWidth-image.width/0.95) >= 1 ){
+    if(imageSizeChanged){
 console.log('NO ENTER FIRST')
       console.log('size changed set to true')
-    setImageSizeChanged(true);
     console.log(imageSizeChanged);
 
       const imageHeight = image.height;    //+58
@@ -114,10 +114,13 @@ console.log('NO ENTER FIRST')
     setImageHeight(image.height);
     
     }
+
+    setImageSizeChanged(false);
+
     return function cleanup() {
      }
 
-  })
+  },[imageSizeChanged])
 
 
   return (

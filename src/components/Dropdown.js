@@ -35,17 +35,28 @@ const Dropdown = (props) => {
    dropdown.style.left = `${posX}px`;
    dropdown.style.top = `${posY}px`;
    console.log(posX,posY)
-   if(imageSizeChanged && updatedImage ){
-    getFireStoreCollection('WhereisWaldo').then((response) => response)
-    .then((data) => setImageData(data));
-    setUpdatedImage(false);
-   }
-   
+  //  if(imageSizeChanged && updatedImage ){
+  //   getFireStoreCollection('WhereisWaldo').then((response) => response)
+  //   .then((data) => setImageData(data));
+  //   setUpdatedImage(false);
+  //  }
+   console.log(imageSizeChanged,'dropdown changed to true ___')
+   console.log(props.imageSizeChanged);
    if(imageSizeChanged != props.imageSizeChanged){
     setImageSizeChanged(props.imageSizeChanged);
   }
   
   },)
+
+  useEffect(()=> {
+      console.log('image size chnaged')
+     getFireStoreCollection('WhereisWaldo').then((response) => response)
+     .then((data) => setImageData(data));
+     if(imageSizeChanged && updatedImage){
+      setImageSizeChanged(false);
+      setUpdatedImage(false);
+     }
+   },[imageSizeChanged,updatedImage])
 
   useEffect(()=> {
   
