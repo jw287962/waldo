@@ -22,6 +22,9 @@ const Dropdown = (props) => {
   const [imageData,setImageData] = useState(undefined);  //this is the targetbox that we check with
   const [imageSizeChanged,setImageSizeChanged] = useState(props.imageSizeChanged);
   const [updatedImage, setUpdatedImage] = useState(true);
+  const [objectsFound,setObjectsFound] = useState(0);
+  const [hasWon, setHasWon] = useState(false);
+  const [finalTime, setFinalTime] = useState(0);
   initializeFireStoreApp();
   const {posX,posY} = props;
 
@@ -40,13 +43,20 @@ const Dropdown = (props) => {
   //   .then((data) => setImageData(data));
   //   setUpdatedImage(false);
   //  }
-   console.log(imageSizeChanged,'dropdown changed to true ___')
-   console.log(props.imageSizeChanged);
    if(imageSizeChanged != props.imageSizeChanged){
     setImageSizeChanged(props.imageSizeChanged);
   }
   
   },)
+
+  useEffect(()=> {
+    if(objectsFound == 2){
+      console.log('won');
+      setHasWon(!hasWon);
+      setFinalTime(props.timer);
+    }
+   
+   },[objectsFound])
 
   useEffect(()=> {
       console.log('image size chnaged')
@@ -99,7 +109,7 @@ if(posX >= positions.bottomL.arrayValue.values[0].integerValue*1 && posX<= posit
     console.log('correct positon for Odlaw for now!!!!!!!!!!!!')
     console.log('___________________-')
    e.target.classList.add('hidden')
-
+  setObjectsFound(objectsFound+1);
   }
 
 }
@@ -109,10 +119,19 @@ if(posX >= positions.bottomL.arrayValue.values[0].integerValue*1 && posX<= posit
 
 
   return (
-    <div className="col dropdown hidden">
-        <button onClick={clickedButton}>Waldo</button>
-        <button onClick={clickedButton}>Odlaw</button>
-        <button onClick={clickedButton} className="outer">...</button>
+
+    <div>
+      <div className={(!hasWon) ? "hidden": "winner"}>
+          <div>
+            YOUR TIME: {finalTime} You have found them all!
+          </div> 
+
+      </div>
+      <div className="col dropdown hidden">
+          <button onClick={clickedButton}>Waldo</button>
+          <button onClick={clickedButton}>Odlaw</button>
+          <button onClick={clickedButton} className="outer">...</button>
+      </div>
     </div>
   )
 }

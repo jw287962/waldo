@@ -30,7 +30,6 @@ const Image = (props) => {
 
 
   const [timer,setTimer] = useState(0);
-
 const [startTime] = useState(startTimer);
 
 
@@ -41,7 +40,7 @@ const [startTime] = useState(startTimer);
     const output = Math.floor(delta / 1000); // in seconds
     // alternatively just show wall clock time:
     setTimer(new Date(output * 1000).toISOString().substring(11, 19));
-}, 10000); 
+}, 1000); 
 
   useEffect(()=> {
     const image = document.querySelector('img');
@@ -127,7 +126,7 @@ console.log('NO ENTER FIRST')
     <div>
       <div>Timer: {timer}</div>
       <img src={currentImage.imageFile}  alt="where" ></img>
-      <Dropdown posX = {posX} posY = {posY} imageID={currentImage.imageName} imageSizeChanged={imageSizeChanged}></Dropdown>
+      <Dropdown posX = {posX} posY = {posY} imageID={currentImage.imageName} imageSizeChanged={imageSizeChanged} timer={timer}></Dropdown>
       </div>
  
     )
